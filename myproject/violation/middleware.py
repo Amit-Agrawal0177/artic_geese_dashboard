@@ -17,3 +17,4 @@ class SessionTimeoutMiddleware(MiddlewareMixin):
         # Update last activity timestamp for every new request
         request.session['last_activity'] = time.time()
 
+#
