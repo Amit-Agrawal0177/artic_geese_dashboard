@@ -35,7 +35,7 @@ html, body {
     margin-left: 230px; /* Space for the sidebar */
     padding: 20px;
     flex-grow: 1;
-    background-color: skyblue;
+    background-color: rgb(240, 240, 240);
     width: auto;
     height: 100vh;
     overflow-y: auto;
@@ -129,6 +129,13 @@ html, body {
     max-width: 200px;
     padding: 10px;
     width: 200px;
+    font-size: 20px;
+}
+.cardReport {
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
     font-size: 20px;
 }
 .icon_block i{

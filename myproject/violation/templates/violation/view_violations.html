@@ -1,22 +1,127 @@
 {% extends 'violation/base.html' %}
 {% load static %}
+
 {% block title %}View Violations{% endblock %}
 
 {% block content %}
-    <div class="violations-container">
-        <br><br>
-        <h2 class="h2">Violations per Month (Bar Graph)</h2>
-        <br>
-        <img class="responsive-img" src="data:image/png;base64,{{ bar_graph_data }}" alt="Bar Graph">
-        <br><br>
-        <h2 class="h2">Violations Trend (Line Chart)</h2>
-        <br>
-        <img class="responsive-img" src="data:image/png;base64,{{ line_chart_data }}" alt="Line Chart">
-<br><br>
-        <h2 class="h2">Violations per Camera Number per Month (Stacked Bar Chart)</h2>
-        <br>
-        <img class="responsive-img" src="data:image/png;base64,{{ camera_violation_chart }}" alt="Camera Violation Chart">
-        <br><br>
+<div class="container-fluid py-4">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class=" fw-bold">Violation Analytics Dashboard</h1>
+            <p class="text-muted">Comprehensive visualization of violation data and trends</p>
+        </div>
     </div>
-{% endblock %}
 
+    <!-- Graphs Section -->
+    <div class="row g-4">
+        <!-- Monthly Violations Bar Graph -->
+        <div class="col-12">
+            <div class="cardViolation shadow-sm">
+                <div class="card-header bg-white border-bottom-0 py-3">
+                    <h2 class="h4 mb-0">Monthly Violation Distribution</h2>
+                    <p class="text-muted small mb-0">Bar graph showing violations recorded each month</p>
+                </div>
+                <div class="card-body" style="background-color: white; padding-left: 10%">
+                    <img class="img-fluid rounded" src="data:image/png;base64,{{ bar_graph_data }}" alt="Monthly Violations Bar Graph">
+                </div>
+            </div>
+        </div>
+
+        <!-- Violations Trend Line Chart -->
+        <div class="col-12" style="margin-top: 20px;">
+            <div class="cardViolation shadow-sm">
+                <div class="card-header bg-white border-bottom-0 py-3">
+                    <h2 class="h4 mb-0">Violation Trends Over Time</h2>
+                    <p class="text-muted small mb-0">Line chart showing the trend of violations</p>
+                </div>
+                <div class="card-body" style="background-color: white; padding-left: 10%">
+                    <img class="img-fluid rounded" src="data:image/png;base64,{{ line_chart_data }}" alt="Violations Trend Line Chart">
+                </div>
+            </div>
+        </div>
+
+        <!-- Camera-wise Violations Stacked Bar Chart -->
+        <div class="col-12" style="margin-top: 20px;">
+            <div class="cardViolation shadow-sm">
+                <div class="card-header bg-white border-bottom-0 py-3">
+                    <h2 class="h4 mb-0">Camera-wise Monthly Violations</h2>
+                    <p class="text-muted small mb-0">Stacked bar chart showing violations per camera per month</p>
+                </div>
+                <div class="card-body" style="background-color: white; padding-left: 10%">
+                    <img class="img-fluid rounded" src="data:image/png;base64,{{ camera_violation_chart }}" alt="Camera-wise Violations Stacked Bar Chart">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Custom styles for the dashboard */
+.container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.cardViolation {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.card-header {
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Make sure images don't exceed their container */
+.card-body img {
+    max-width: 100%;
+    max-height: 600px; /* Adjust this value based on your needs */
+    object-fit: contain;
+    background-color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .h4 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Add subtle animation to cards */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Stagger the animations */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+</style>
+{% endblock %}

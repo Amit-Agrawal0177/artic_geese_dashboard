@@ -1,21 +1,145 @@
 {% extends 'violation/base.html' %}
 {% load static %}
 
-{% block title %}Generate Record{% endblock %}
+{% block title %}Generate Record{% endblock title %}
 
 {% block content %}
-    <div class="report-container">
-        <div class="report">
-            <h2 class="h2 text-center">Generate Report</h2>
-            <form method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form.as_p }}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="cardReport shadow-lg border-0">
+                <div class="card-header">
+                    <h2 class="h3 mb-0">Generate Report</h2>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Generate Report</button>
+                <div class="card-body p-5">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                        <div class="mb-4">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-bold">
+                                {{ field.label }}
+                                {% if field.field.required %}
+                                    <span class="text-danger">*</span>
+                                {% endif %}
+                            </label>
+                            
+                            {% if field.errors %}
+                            <div class="alert alert-danger py-2">
+                                {{ field.errors }}
+                            </div>
+                            {% endif %}
+                            
+                            {% if field.help_text %}
+                            <small class="form-text text-muted d-block mb-2">
+                                {{ field.help_text }}
+                            </small>
+                            {% endif %}
+                            
+                            <div class="field-wrapper">
+                                {{ field.as_widget|safe }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="d-grid gap-2 mt-5" style="padding-left: 20%">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-file-alt me-2"></i> Generate Report
+                            </button>
+    
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-{% endblock %}
+</div>
+
+<style>
+.cardReport {
+    border-radius: 15px;
+    transition: transform 0.2s;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.cardReport:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+/* Style all form inputs */
+.field-wrapper input,
+.field-wrapper select,
+.field-wrapper textarea {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.field-wrapper input:focus,
+.field-wrapper select:focus,
+.field-wrapper textarea:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn {
+    
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+
+.btn-outline-secondary:hover {
+    transform: translateY(-1px);
+}
+
+/* Add specific styling for different input types if needed */
+.field-wrapper input[type="date"],
+.field-wrapper input[type="datetime-local"] {
+    min-height: calc(1.5em + 1.5rem + 2px);
+}
+
+.field-wrapper select {
+    padding-right: 2rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    appearance: none;
+}
+</style>
+{% endblock content %}

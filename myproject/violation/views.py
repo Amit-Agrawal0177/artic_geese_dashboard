@@ -104,6 +104,7 @@ def dashboard(request):
         form = DateRangeForm()
 
     # Generate graph data if necessary
+    print(df)
     graph_data = create_graph(df)
 
     return render(request, 'violation/dashboard.html', {
@@ -206,7 +207,11 @@ def extract_violations_from_images(image_dir):
 
 # Create graph for the dashboard
 def create_graph(df):
+    print(df['Date'])
     df = df.dropna(subset=['Date'])
+    
+    print(df)
+    
     df['Month'] = df['Date'].dt.month
 
     monthly_counts = df['Month'].value_counts().sort_index()

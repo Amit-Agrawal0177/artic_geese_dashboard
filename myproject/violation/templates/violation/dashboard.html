@@ -2,388 +2,339 @@
 {% load static %}
 
 {% block content %}
-<div>
-    <h2 class="heading">Today Violation</h2>
-    <div class="block">
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-helmet-un" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Today</h4>
-                <p>Without Helmet: {{ violation_counts_month.Without_Helmet }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-shirt" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Today</h4>
-                <p>Without Jacket: {{ violation_counts_month.Without_Jacket }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-industry" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Today</h4>
-                <p>Both Violations: {{ violation_counts_month.Both }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-industry" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Today</h4>
-                <p>Total Violations: {{ total_violations_month }}</p>
-            </div>
-        </div>
-        
-    </div>
-   
-    <h2 class="heading">Monthly Violation</h2>
-    <div class="block">
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-helmet-un" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Monthly</h4>
-                <p>Without Helmet: {{ violation_counts_month.Without_Helmet }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-shirt" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Monthly</h4>
-                <p>Without Jacket: {{ violation_counts_month.Without_Jacket }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-industry" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Monthly</h4>
-                <p>Both Violations: {{ violation_counts_month.Both }}</p>
- 
-            </div>
-        </div>
-        <div class="card">
-            <div class="icon_block">
-                <i class="fa-solid fa-industry" style="background-color: orange;"></i>
-            </div>
-            <div class="value">
-                <h4>Monthly</h4>
-                <p>Total Violations: {{ total_violations_month }}</p>
-            </div>
-        </div>
+<div class="dashboard-container">
+    <!-- Today's Violations Section -->
+    <div class="section-header">
+        <h2 class="heading">
+            <i class="fas fa-calendar-day"></i>
+            Today's Violations
+        </h2>
     </div>
     
-    
-    
+    <div class="stats-grid">
+        <div class="stat-card helmet">
+            <div class="stat-icon">
+                <i class="fa-solid fa-helmet-un"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Without Helmet</h3>
+                <p class="stat-number">{{ violation_counts_month.Without_Helmet }}</p>
+                <span class="stat-label">Today's Count</span>
+            </div>
+        </div>
 
+        <div class="stat-card jacket">
+            <div class="stat-icon">
+                <i class="fa-solid fa-shirt"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Without Jacket</h3>
+                <p class="stat-number">{{ violation_counts_month.Without_Jacket }}</p>
+                <span class="stat-label">Today's Count</span>
+            </div>
+        </div>
 
-    {% comment %} <div class="violation-summary">
-        <div class="violation-box">
-            <label for="without_jacket_today">Without Jacket (Today):</label>
-            <input type="text" id="without_jacket_today" value="{{ violation_counts_today.Without_Jacket }}" readonly>
+        <div class="stat-card both">
+            <div class="stat-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Both Violations</h3>
+                <p class="stat-number">{{ violation_counts_month.Both }}</p>
+                <span class="stat-label">Today's Count</span>
+            </div>
         </div>
-        <div class="violation-box">
-            <label for="without_helmet_today">Without Helmet (Today):</label>
-            <input type="text" id="without_helmet_today" value="{{ violation_counts_today.Without_Helmet }}" readonly>
+
+        <div class="stat-card total">
+            <div class="stat-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Violations</h3>
+                <p class="stat-number">{{ total_violations_month }}</p>
+                <span class="stat-label">Today's Total</span>
+            </div>
         </div>
-        <div class="violation-box">
-            <label for="both_today">Both Violations (Today):</label>
-            <input type="text" id="both_today" value="{{ violation_counts_today.Both }}" readonly>
-        </div>
-        <div class="violation-box">
-            <label for="total_violations_today">Total Violations (Today):</label>
-            <input type="text" id="total_violations_today" value="{{ total_violations_today }}" readonly>
-        </div>
-    </div> {% endcomment %}
-    
-    {% comment %} <div class="text-center mt-0">
-        <img src="{% static 'img/hardware.png' %}" alt="Logo" class="image-thumbnail" width="250px" height="150px">
-        <h2 class="mt-2"><b>Dashboard Overview</b></h2>
-        <p><b>Welcome to the dashboard. Use the navigation menu to access different sections.</b></p>
     </div>
-     {% endcomment %}
-     
-    <div class="graph-section mt-5">
-        <h2 style="mt-5">Violation Analytics (Counts and Percentages)</h2>
-        <br>
-        <img src="data:image/png;base64,{{ graph_data }}" alt="Violation Graph" class="img-fluid">
+
+    <!-- Monthly Violations Section -->
+    <div class="section-header">
+        <h2 class="heading">
+            <i class="fas fa-calendar-alt"></i>
+            Monthly Violations
+        </h2>
     </div>
-<br><br><br>
-<div class="violations-section mt-4">
-    <h2>Last 5 Violations</h2>
-    <table class="table table-striped " style="border: 1px solid black; border-collapse: collapse;">
-        <thead class="mt-3;">
-            <tr>
-                <th style="border: 1px solid black;">Date</th>
-                <th style="border: 1px solid black;">Camera Number</th>
-                <th style="border: 1px solid black;">Without Jacket</th>
-                <th style="border: 1px solid black;">Without Helmet</th>
-                <th style="border: 1px solid black;">Both</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for violation in last_5_violations %}
+
+    <div class="stats-grid">
+        <div class="stat-card helmet">
+            <div class="stat-icon">
+                <i class="fa-solid fa-helmet-un"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Without Helmet</h3>
+                <p class="stat-number">{{ violation_counts_month.Without_Helmet }}</p>
+                <span class="stat-label">Monthly Count</span>
+            </div>
+        </div>
+
+        <div class="stat-card jacket">
+            <div class="stat-icon">
+                <i class="fa-solid fa-shirt"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Without Jacket</h3>
+                <p class="stat-number">{{ violation_counts_month.Without_Jacket }}</p>
+                <span class="stat-label">Monthly Count</span>
+            </div>
+        </div>
+
+        <div class="stat-card both">
+            <div class="stat-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Both Violations</h3>
+                <p class="stat-number">{{ violation_counts_month.Both }}</p>
+                <span class="stat-label">Monthly Count</span>
+            </div>
+        </div>
+
+        <div class="stat-card total">
+            <div class="stat-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Total Violations</h3>
+                <p class="stat-number">{{ total_violations_month }}</p>
+                <span class="stat-label">Monthly Total</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Graph Section -->
+    <div class="section-header">
+        <h2 class="heading">
+            <i class="fas fa-chart-line"></i>
+            Violation Analytics
+        </h2>
+    </div>
+    <div class="graph-container">
+        <img src="data:image/png;base64,{{ graph_data }}" alt="Violation Graph" class="analytics-graph">
+    </div>
+
+    <!-- Recent Violations Table -->
+    <div class="section-header">
+        <h2 class="heading">
+            <i class="fas fa-history"></i>
+            Recent Violations
+        </h2>
+    </div>
+    <div class="table-container">
+        <table class="violations-table">
+            <thead>
                 <tr>
-                    <td style="border: 1px solid black;">{{ violation.Date }}</td>
-                    <td style="border: 1px solid black;">{{ violation.Camera_Number }}</td>
-                    <td style="border: 1px solid black;">{{ violation.Without_Jacket }}</td>
-                    <td style="border: 1px solid black;">{{ violation.Without_Helmet }}</td>
-                    <td style="border: 1px solid black;">{{ violation.Both }}</td>
+                    <th>Date</th>
+                    <th>Camera Number</th>
+                    <th>Without Jacket</th>
+                    <th>Without Helmet</th>
+                    <th>Both</th>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="5" style="border: 1px solid black; text-align: center;">No violations found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for violation in last_5_violations %}
+                    <tr>
+                        <td>{{ violation.Date }}</td>
+                        <td>{{ violation.Camera_Number }}</td>
+                        <td>{{ violation.Without_Jacket }}</td>
+                        <td>{{ violation.Without_Helmet }}</td>
+                        <td>{{ violation.Both }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="no-data">No violations found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
+<style>
+    .dashboard-container {
+        padding: 2rem;
+        background-color: #f8f9fa;
+    }
 
-    {% comment %} <div class="violation-counts-section mt-4">
-        <h2>This Month's Violation Summary</h2>
-        <p>Without Jacket: {{ violation_counts_month.Without_Jacket }}</p>
-        <p>Without Helmet: {{ violation_counts_month.Without_Helmet }}</p>
-        <p>Both Violations: {{ violation_counts_month.Both }}</p>
-        <p>Total Violations (This Month): {{ total_violations_month }}</p>
-    </div> {% endcomment %}
+    .section-header {
+        margin: 2rem 0 1rem 0;
+    }
 
-       {% comment %} <div>
-        <h2>Today's Violations</h2>
-        <p>Without Jacket: {{ violation_counts_today.Without_Jacket }}</p>
-        <p>Without Helmet: {{ violation_counts_today.Without_Helmet }}</p>
-        <p>Both Violations: {{ violation_counts_today.Both }}</p>
-        <p>Total Violations Today: {{ total_violations_today }}</p>
+    .heading {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+    }
 
-       </div> {% endcomment %}
-</div>
+    .heading i {
+        margin-right: 0.5rem;
+        color: #3498db;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-icon {
+        background-color: #e3f2fd;
+        padding: 1rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+    }
+
+    .stat-icon i {
+        font-size: 1.5rem;
+        color: #2196f3;
+    }
+
+    .stat-content h3 {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
+    .graph-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .analytics-graph {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .table-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+    }
+
+    .violations-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .violations-table th,
+    .violations-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .violations-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .violations-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .violations-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .no-data {
+        text-align: center;
+        color: #6c757d;
+        padding: 2rem;
+    }
+
+    /* Color variations for stat cards */
+    .stat-card.helmet .stat-icon {
+        background-color: #fff3e0;
+    }
+    .stat-card.helmet .stat-icon i {
+        color: #ff9800;
+    }
+
+    .stat-card.jacket .stat-icon {
+        background-color: #e8f5e9;
+    }
+    .stat-card.jacket .stat-icon i {
+        color: #4caf50;
+    }
+
+    .stat-card.both .stat-icon {
+        background-color: #ffebee;
+    }
+    .stat-card.both .stat-icon i {
+        color: #f44336;
+    }
+
+    .stat-card.total .stat-icon {
+        background-color: #e3f2fd;
+    }
+    .stat-card.total .stat-icon i {
+        color: #2196f3;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dashboard-container {
+            padding: 1rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .stat-card {
+            padding: 1rem;
+        }
+
+        .violations-table {
+            font-size: 0.9rem;
+        }
+    }
+</style>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} 
-{% extends 'violation/base.html' %}
-{% load static %}
-
-{% block content %}
-<div>
-    <div class="text-center mt-0">
-        <img src="{% static 'img/hardware.png' %}" alt="Logo" class="image-thumbnail" width="250px" height="150px">
-    <h2 class="mt-2"><b>Dashboard Overview</b></h2>
-    <p><b>Welcome to the dashboard. Use the navigation menu to access different sections.</b></p>
-</div>
-
-    <div class="graph-section mt-4">
-        <h2>Violation Analytics (Counts and Percentages)</h2>
-        <img src="data:image/png;base64,{{ graph_data }}" alt="Violation Graph" class="img-fluid">
-    </div>
-</div>
-{% endblock %} {% endcomment %}
-
-
-
-
-
-
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .header {
-            padding: 10px;
-            background-color: #f8f9fa;
-            text-align: center;
-        }
-        .header img {
-            max-width: 150px;
-        }
-        .sidebar {
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 200px; /* Specify the width of the sidebar */
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
-        .sidebar .nav-link {
-            color: #333;
-        }
-        .content {
-            margin-left: 220px; /* Adjust margin-left to ensure no overlap */
-            padding: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Load static files -->
-    {% load static %}
-
-    <!-- Header with Logo -->
-    
-
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
-        <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-                <!-- Header with Logo -->
-                <div class="header">
-                    <img src="{% static 'img/logo.jpg' %}" alt="Logo" style="max-width: 150px;">
-                </div>
-
-                <!-- dashboard.html -->
-                <h1>Dashboard</h1>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'generate_record' %}">Generate Report</a>
-                </li>
-                
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'view_violations' %}">View Violations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'help' %}">Settings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <div class="content">
-        <h2><b>Dashboard Overview</b></h2>
-        <p><b>Welcome to the dashboard. Use the navigation menu to access different sections.</b></p>
-
-        <!-- Insert dynamic content here -->
-        {% block content %}
-        {% endblock %}
-    </div>
-
-    <div>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            <h2>Generate Report</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Generate Report</button>
-            </form>
-
-            <div class="graph-section mt-4">
-                <h2>Violation Analytics (Counts and Percentages)</h2>
-                <img src="data:image/png;base64,{{ graph_data }}" alt="Violation Graph" class="img-fluid">
-            </div>
-        </main>
-    </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html> {% endcomment %}
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <h4>Dashboard</h4>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                Generate Report
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                View Violations
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Settings
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-link" onclick="location.href='{% url 'logout' %}'">Sign Out</button>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2>Generate Report</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Generate Report</button>
-                </form>
-
-                <div class="graph-section mt-4">
-                    <h2>Violation Analytics (Counts and Percentages)</h2>
-                    <img src="data:image/png;base64,{{ graph_data }}" alt="Violation Graph" class="img-fluid">
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></
-
- {% endcomment %}
